@@ -8,7 +8,15 @@ const PORT = process.env.PORT || 5000;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const MODEL_NAME = process.env.MODEL_NAME;
 
-app.use(cors());
+app.use(
+    cors({
+      origin: "https://savage-sparks.vercel.app", // Allow only this origin
+      methods: ["GET", "POST"], // Allow specific methods
+      allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+      credentials: true, // Allow cookies if needed
+    })
+  );
+  
 app.use(express.json());
 
 app.post("/generate", async (req, res) => {
