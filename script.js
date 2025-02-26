@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitButton.disabled = true;
       submitButton.innerHTML = "Generating...";
 
-      fetch("https://cuddly-space-carnival-69rvrg5j4vjr3494-5000.app.github.dev/generate", {
+      fetch("https://savagesparks-production.up.railway.app/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, mode }),
