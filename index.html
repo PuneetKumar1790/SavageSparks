@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&display=swap">
 </head>
+
 <body>
     <div class="lightning-container">
         <div class="lightning"></div>
@@ -15,7 +17,8 @@
 
     <header>
         <div class="logo">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DALL%C2%B7E%202025-02-26%2018.52.28%20-%20A%20high-impact,%20ultra-modern%20logo%20for%20'SavageSparks'.%20The%20text%20'SavageSparks'%20should%20be%20in%20a%20bold,%20futuristic%20font%20with%20a%20fiery%20and%20electrified%20effect,-LkPpRvF5NApof8dzPTOf8KImsht7MS.webp" alt="SavageSparks Logo" class="logo-img">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DALL%C2%B7E%202025-02-26%2018.52.28%20-%20A%20high-impact,%20ultra-modern%20logo%20for%20'SavageSparks'.%20The%20text%20'SavageSparks'%20should%20be%20in%20a%20bold,%20futuristic%20font%20with%20a%20fiery%20and%20electrified%20effect,-LkPpRvF5NApof8dzPTOf8KImsht7MS.webp"
+                alt="SavageSparks Logo" class="logo-img">
         </div>
         <h1 class="tagline">Fuel the flames, rule the game!</h1>
     </header>
@@ -34,7 +37,7 @@
             <div class="char-counter">500 characters remaining</div>
             <button id="submitButton" class="glow-button">
                 <span class="button-text">SUBMIT</span>
-                
+
                 <div class="button-sparks"></div>
             </button>
         </div>
@@ -50,7 +53,7 @@
             <button class="share-button">Share</button>
         </div>
     </main>
-    
+
     <footer>
         <div class="footer-content">
             <p>© 2024 SavageSparks - Unleash the Roast</p>
@@ -70,40 +73,43 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, mode }),
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.message) {
-                    console.log("Roast:", data.message);
-                    document.getElementById("result").textContent = data.message;
-        
-                    // Debugging: Check if speech synthesis is available
-                    if ('speechSynthesis' in window) {
-                        console.log("Speech Synthesis API is supported.");
-                        speakText(data.message);
-                    } else {
-                        console.error("Speech Synthesis API is NOT supported in this browser.");
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message) {
+                        console.log("Roast:", data.message);
+                        document.getElementById("result").textContent = data.message;
+
+                        // Debugging: Check if speech synthesis is available
+                        if ('speechSynthesis' in window) {
+                            console.log("Speech Synthesis API is supported.");
+                            speakText(data.message);
+                        } else {
+                            console.error("Speech Synthesis API is NOT supported in this browser.");
+                        }
                     }
-                }
-            })
-            .catch(error => console.error("Error fetching roast:", error));
+                })
+                .catch(error => console.error("Error fetching roast:", error));
         }
-        
+
         function speakText(text) {
             console.log("Speaking:", text);
-        
+
             const speech = new SpeechSynthesisUtterance(text);
             speech.lang = "hi-IN"; // Hindi (India) accent
             speech.rate = 1; // Normal speed
             speech.pitch = 1;
-        
+
             speech.onstart = () => console.log("Speech started");
             speech.onend = () => console.log("Speech ended");
             speech.onerror = (e) => console.error("Speech error:", e);
-        
+
             window.speechSynthesis.speak(speech);
         }
-        </script>
-        
-</body>
-</html>
+    </script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "d439a892b2d5415282245c87a249e108"}'></script><!-- End Cloudflare Web Analytics -->
 
+</body>
+
+</html>
