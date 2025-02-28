@@ -106,9 +106,37 @@
             window.speechSynthesis.speak(speech);
         }
     </script>
-    <!-- Cloudflare Web Analytics -->
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
-        data-cf-beacon='{"token": "d439a892b2d5415282245c87a249e108"}'></script><!-- End Cloudflare Web Analytics -->
+    <script>
+        document.querySelector(".share-button").addEventListener("click", function () {
+            let roastText = document.getElementById("resultContent").innerText; // Get roast text
+            
+            let shareMessage = `🔥 Just got roasted by Savage Sparks! 😂💀\n\n"${roastText}"\n\nWanna get roasted too? Try it here: https://savage-sparks.vercel.app/ 😈🔥`;
+    
+            if (navigator.share) {
+                // **Share Roast Text on Any App**
+                navigator.share({
+                    title: "Savage Sparks Roast",
+                    text: shareMessage
+                }).catch((err) => console.log("Sharing failed:", err));
+            } else {
+                // **WhatsApp Sharing Fallback**
+                let whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+                window.open(whatsappUrl, "_blank");
+    
+                // **Copy-to-Clipboard Alert**
+                let copyText = document.createElement("textarea");
+                copyText.value = shareMessage;
+                document.body.appendChild(copyText);
+                copyText.select();
+                document.execCommand("copy");
+                document.body.removeChild(copyText);
+                alert("Message copied! Paste it while sharing.");
+            }
+        });
+    </script>
+    
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
 
 </body>
 
